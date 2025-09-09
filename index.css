@@ -1,0 +1,575 @@
+*{
+   cursor: url('IMG/pngegg.png'), auto !important;
+}
+body { background: #121212; color: white; }
+  .option { cursor: pointer; padding: 10px; margin-bottom: 6px; border-radius: 5px; background: #333; transition: background-color 0.3s;}
+  .option:hover { background: #444; }
+    .option {
+      cursor: pointer;
+      padding: 10px;
+      margin-bottom: 6px;
+      border-radius: 5px;
+      background: #333;
+      transition: background-color 0.3s;
+    }
+    .option:hover {
+      background: #444;
+    }
+    .drag-container {
+      margin-top: 40px;
+    }
+    .drag-source, .drag-target {
+      background: #222;
+      border: 2px dashed #555;
+      padding: 10px;
+      min-height: 50px;
+      border-radius: 5px;
+      color: #eee;
+      margin-bottom: 15px;
+    }
+    .drag-source {
+      cursor: grab;
+    }
+    .drag-target.over {
+      border-color: #0d6efd;
+      background: #0d6efd22;
+    }
+.question-heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  background-color: #1a1a1a;
+  border: 2px solid #0f62fe;
+  padding: 12px 20px;
+  border-radius: 30px;
+  width: fit-content;
+  box-shadow: 0 0 10px #0f62fe;
+  letter-spacing: 1.2px;
+  user-select: none;
+  margin-bottom: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-transform: uppercase;
+}
+#timer {
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: 'Arial', sans-serif;
+  color: #f0f0f0; /* gris claro para contraste suave */
+  background-color: #121212; /* gris muy oscuro, casi negro */
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: 2px solid #4caf50; /* verde apagado elegante */
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.7);
+  width: fit-content;
+  user-select: none;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+
+/*STILO DE PERSONALIZACION DE SIMULADOR */
+
+.my-swal-container {
+  background: rgba(20, 24, 35, 0.65) !important;
+  backdrop-filter: blur(30px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(30px) saturate(180%) !important;
+  border-radius: 24px !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow:
+    0 4px 30px rgba(0, 255, 234, 0.1),
+    inset 0 0 20px rgba(0, 255, 255, 0.04) !important;
+  color: #dffeff !important;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  padding: 2rem !important;
+  animation: neonFadeUp 0.5s ease-out;
+  max-width: 500px !important;
+}
+
+/*  Entrada animada */
+@keyframes neonFadeUp {
+  0% {
+    transform: translateY(20px) scale(0.96);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/*  Inputs de usuario con efecto inmersivo */
+.my-swal-input {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1.6px solid rgba(255, 255, 255, 0.14) !important;
+  border-radius: 16px !important;
+  padding: 15px 22px !important;
+  font-size: 17px !important;
+  font-weight: 500 !important;
+  color: #ecfeff !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  margin-bottom: 1.4rem !important;
+  transition: all 0.4s ease;
+  box-shadow:
+    inset 0 0 10px rgba(0, 255, 255, 0.05),
+    0 0 6px rgba(0, 255, 255, 0.03);
+}
+
+.my-swal-input::placeholder {
+  color: #a7e3eb !important;
+}
+
+.my-swal-input:focus {
+  background: rgba(255, 255, 255, 0.13) !important;
+  border-color: #00fff0 !important;
+  box-shadow: 0 0 12px #00fff299 !important;
+  outline: none !important;
+}
+
+/*  Checkbox elegante */
+.my-swal-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #cff;
+  margin-top: 10px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.my-swal-label input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #00ffe6;
+  border-radius: 6px;
+  border: 1px solid #00ffe622;
+}
+
+/*  Botón Confirmar: efecto brillante */
+.swal2-confirm.btn {
+  background: linear-gradient(135deg, #00ffee, #00b9ff) !important;
+  color: #021212 !important;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 16px;
+  box-shadow:
+    0 0 14px rgba(0, 255, 255, 0.4),
+    inset 0 0 4px rgba(0, 255, 255, 0.2);
+  transition: all 0.35s ease;
+}
+
+.swal2-confirm.btn:hover {
+  background: linear-gradient(135deg, #00ffff, #00cfff) !important;
+  transform: translateY(-2px) scale(1.04);
+  box-shadow:
+    0 0 20px #00fff8cc,
+    inset 0 0 6px #00fff880;
+}
+
+
+.swal2-cancel.btn {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+  color: #b5cdd0 !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  padding: 12px 28px;
+  border-radius: 16px;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.swal2-cancel.btn:hover {
+  background-color: rgba(255, 255, 255, 0.12) !important;
+  color: white !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+.custom-popup {
+  background: linear-gradient(135deg, #1b2735, #090a0f);
+  border-radius: 18px;
+  padding: 2rem 2.5rem !important;
+  box-shadow:
+    0 0 10px #00ffe099,
+    inset 0 0 25px #00fff0aa;
+  border: 2.5px solid #00ffe0;
+  color: #00ffe0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 400px !important;
+  text-align: center;
+  user-select: none;
+}
+
+.custom-title {
+  font-weight: 900;
+  font-size: 2.2rem;
+  color: #00fff0;
+  text-shadow: 0 0 15px #00fff0aa;
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.05em;
+}
+
+.custom-text {
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: #a0f7f7cc;
+  margin-bottom: 1.4rem;
+  line-height: 1.4;
+}
+
+.custom-html {
+  margin-top: -0.6rem;
+}
+
+.custom-btn {
+  background: linear-gradient(45deg, #00ffc8, #00bfa6);
+  border: none !important;
+  border-radius: 12px !important;
+  padding: 12px 30px !important;
+  font-weight: 700 !important;
+  font-size: 1.1rem !important;
+  color: #041f2a !important;
+  box-shadow:
+    0 0 15px #00ffbbcc,
+    0 6px 8px #00ccaacc;
+  transition: all 0.3s ease !important;
+  user-select: none;
+}
+
+.custom-btn:hover {
+  background: linear-gradient(45deg, #00e3aa, #00c294);
+  box-shadow:
+    0 0 28px #00ffcc,
+    0 8px 12px #00ddbbaa;
+  color: #031a1a !important;
+  cursor: pointer;
+ 
+}
+
+
+
+.my-swal-container {
+  background: rgba(20, 24, 35, 0.65) !important;
+  backdrop-filter: blur(30px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(30px) saturate(180%) !important;
+  border-radius: 24px !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.08) !important;
+  box-shadow:
+    0 4px 30px rgba(0, 255, 234, 0.1),
+    inset 0 0 20px rgba(0, 255, 255, 0.04) !important;
+  color: #dffeff !important;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  padding: 2rem !important;
+  animation: neonFadeUp 0.5s ease-out;
+  max-width: 500px !important;
+  text-align: center;
+  user-select: none;
+}
+
+/*  Animación de entrada */
+@keyframes neonFadeUp {
+  0% {
+    transform: translateY(20px) scale(0.96);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/*  Título personalizado */
+.custom-title {
+  font-weight: 900;
+  font-size: 2.2rem;
+  color: #00fff0;
+  text-shadow: 0 0 15px #00fff0aa;
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.05em;
+}
+
+/*  Texto descriptivo */
+.custom-text {
+  font-weight: 500;
+  font-size: 1.1rem;
+  color: #a0f7f7cc;
+  margin-bottom: 1.4rem;
+  line-height: 1.4;
+}
+/*  Botón: Normal Mode */
+.btn-normal {
+  background: linear-gradient(135deg, #00ffee, #00b9ff) !important;
+  color: #021212 !important;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 16px;
+  box-shadow:
+    0 0 14px rgba(0, 255, 255, 0.4),
+    inset 0 0 4px rgba(0, 255, 255, 0.2);
+  transition: all 0.35s ease;
+}
+
+.btn-normal:hover {
+  background: linear-gradient(135deg, #00ffff, #00cfff) !important;
+  transform: translateY(-2px) scale(1.04);
+  box-shadow:
+    0 0 20px #00fff8cc,
+    inset 0 0 6px #00fff880;
+}
+
+/*  Botón: Random Mode */
+.btn-random {
+  background: linear-gradient(135deg, #ff66e0, #7af7c6) !important;
+  color: #1a0c1c !important;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 16px;
+  box-shadow:
+    0 0 14px rgba(255, 200, 255, 0.4),
+    inset 0 0 4px rgba(255, 255, 255, 0.2);
+  transition: all 0.35s ease;
+}
+
+.btn-random:hover {
+  background: linear-gradient(135deg, #f760d0, #67f4c2) !important;
+  transform: translateY(-2px) scale(1.04);
+  box-shadow:
+    0 0 20px #ffccffcc,
+    inset 0 0 6px #ffeeff88;
+}
+
+/*2do boton para validar*/
+
+
+.btn-validar {
+  background-color: #198754;
+  color: white !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+.btn-validar:hover {
+  background-color: #117245 !important;
+  color: white !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+}
+/*ESTILO PARA FONDO DE ALERTAS DE CORRECT AND INCORRECT*/
+.swal-green {
+  background-color: #67b669 !important;
+  color: white !important; 
+}
+
+
+  .swal-red {
+  background-color: #d87373 !important; 
+  color: white !important;
+}
+.swal-orange {
+  background-color: #f1ca53 !important; /* color naranja claro tipo Bootstrap warning */
+  color: #000 !important;
+}
+
+/*ESTILO RESPONSIVO CON MEDIA QUERY PARA CUAL QUIER DISPOSITIVO*/
+
+  @media (max-width: 576px) {
+  .question-heading {
+    font-size: 1.2rem;
+    padding: 8px 14px;
+  }
+
+  #timer {
+    font-size: 1.2rem;
+    padding: 6px 12px;
+  }
+
+  .drag-source, .drag-target {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .btn, .btn-validar, .swal2-confirm.btn, .swal2-cancel.btn {
+    font-size: 0.9rem;
+    padding: 10px 20px;
+  }
+}
+@media (max-width: 576px) {
+  .drag-container {
+    margin-top: 20px;
+  }
+
+  .navigation-container, .text-center.my-4 {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .navigation-buttons button,
+  .d-flex.gap-2 button {
+    flex: 1 1 auto;
+    width: 100%;
+    margin-bottom: 6px;
+  }
+}
+@media (hover: none) and (pointer: coarse) {
+  * { cursor: auto !important; }
+}
+
+/*IMAGENS DE LAS PREGUNTAS */
+
+.custom-img {
+  max-width: 90%; /* por defecto es grande */
+  height: auto;
+}
+
+@media (min-width: 992px) { /* para pantallas laptop en adelante */
+  .custom-img {
+    max-width: 600px; /* más grande en laptop */
+  }
+}
+
+/*CSS DE BARRA DE CARGA*/
+
+.fancy-progress {
+  background-color: #2b2f3a; 
+  border-radius: 20px;
+  overflow: hidden;
+  height: 20px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.fancy-progress-bar {
+  height: 100%;
+  background: linear-gradient(
+    270deg,
+    #00c6ff,
+    #0072ff,
+    #00c6ff
+  ); /* gradiente que se moverá */
+  background-size: 200% 100%;
+  border-radius: 20px;
+  animation: moveGradient 3s linear infinite; /* animación de movimiento */
+  box-shadow: 0 0 15px rgba(0, 198, 255, 0.7);
+  transition: width 0.4s ease-in-out; /* que avance suavemente */
+  position: relative;
+}
+
+/* Efecto de brillo que recorre la barra */
+.fancy-progress-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -30%;
+  width: 30%;
+  height: 100%;
+  background: rgba(255,255,255,0.3);
+  transform: skewX(-25deg);
+  animation: shine 2s ease-in-out infinite;
+}
+
+/* Animación del gradiente que se mueve */
+@keyframes moveGradient {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Animación del brillo */
+@keyframes shine {
+  0% { left: -30%; }
+  100% { left: 100%; }
+}
+
+/*JUEGO*/
+
+#custom-gami-alert-container {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.custom-gami-alert {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #ff8a00, #e52e71);
+  color: white;
+  font-weight: 700;
+  padding: 12px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(229, 46, 113, 0.6);
+  opacity: 0;
+  transform: translateX(-150%);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  pointer-events: auto;
+  min-width: 220px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.custom-gami-alert.custom-gami-show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.custom-gami-icon {
+  font-size: 24px;
+  margin-right: 12px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+}
+
+/*animacion de carga */
+/* Texto degradado brillante y suave */
+.error-text-gradient {
+  font-size: 1.4rem;
+  font-weight: bold;
+  background: linear-gradient(90deg, #ff4d4d, #ff66b2, #00f0ff, #00c3ff);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientMove 4s ease infinite;
+}
+
+/* Spinner tipo galaxia que cambia de color suavemente */
+.galaxy-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-top: 4px solid #00f0ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite, colorShift 3s ease-in-out infinite alternate;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes colorShift {
+  0%   { border-top-color: #00f0ff; }
+  50%  { border-top-color: #ff66b2; }
+  100% { border-top-color: #ff4d4d; }
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
