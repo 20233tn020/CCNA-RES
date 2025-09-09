@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" >
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Simulador CCNA + Drag & Drop</title>
+<link rel="shortcut icon" href="IMG/ICONO.png">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  
+  <link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<style>
+
+  .footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(135deg, #1f1f1f, #2c2c2c);
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.3);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    transition: background 0.3s ease;
+  }
+
+  .footer:hover {
+    background: linear-gradient(135deg, #2c2c2c, #3a3a3a);
+  }
+
+  .footer-text {
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+  }
+
+  @media (max-width: 576px) {
+    .footer-text {
+      font-size: 0.8rem;
+    }
+  }
+</style>
+  <script>
+  //window.location.href = "mantenimiento.html";
+
+  document.addEventListener('keydown', function(e) {
+  // Bloquear F12
+  if (e.key === "F12") {
+    e.preventDefault();
+  }
+  // Bloquear Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+  if (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J" || e.key === "C")) {
+    e.preventDefault();
+  }
+});
+
+document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+});
+function question_range(event) {
+  Swal.fire({
+  title: "not available",
+  text: "coming soon",
+  icon: "question",
+  customClass: {
+      popup: 'my-swal-container',
+  },
+  showClass: {
+    popup: 'animate__animated animate__fadeInDown'
+  },
+  hideClass: {
+    popup: 'animate__animated animate__fadeOutUp'  
+  },
+});
+}
+  </script>
+</head>
+<body class="container py-4">
+<h2 class="mb-3 text-center">CCNA Simulator</h2>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div id="timer" style="font-size: 1.3rem;">⏱ 00:00</div>
+  <button id="btn-empezar" class="btn btn-primary" onclick="iniciarSimulador();"  >start</button>
+  <button id="btn-validar" onclick="validarRespuesta()" style="display:none;" class="btn btn-success mt-3">Validate response</button>
+</div>
+
+  <div id="question-number" class="question-heading"></div>
+  
+<div class="mb-3">
+  <div id="question" style="font-weight: bold; font-size: 1.2rem; margin-bottom: 10px;"></div>
+<div id="question-image" style="margin-bottom: 10px;"></div>
+  <div id="options"></div>
+</div>
+<div class="progress fancy-progress mb-4">
+  <div id="progress-bar" class="progress-bar fancy-progress-bar" role="progressbar" style="width: 0%"></div>
+</div>
+
+<div class="d-flex gap-2 mb-4">
+  <button id="btn-pausa" class="btn btn-warning" onclick="pausarExamen()" disabled>⏸ Pause</button>
+  <button id="btn-reanudar" class="btn btn-success" onclick="reanudarExamen()" style="display: none;">▶ Resume</button>
+    <button id="btn-terminar" class="btn btn-danger" onclick="terminarSimulador()" style="display: none;">⛔ Terminar</button>
+  <button id="btn-validarr"  class="btn-validar" style="display: none;"  onclick="validarRespuesta()"  >Validate response</button>
+
+</div>
+   <hr class="my-5">
+ <h3>⚙️ Custom simulator</h3>
+<button id="btn-configurar" class="btn btn-warning" > Personalize</button>
+ <hr class="my-5">
+ 
+ <h3>Customize the question range for your simulation</h3>
+<button id="btn-configurar-rango" class="btn btn-secondary" onclick="question_range(event)">⚙ Configure range</button>
+  <hr class="my-5"><!--INICIO DE DRAG & DROP-->
+<div class="container">
+  <h2>Drag and drop </h2>
+  <!-- Botones de navegación y progreso -->
+  <div class="navigation-container mb-4">
+ <!-- Indicador de progreso -->
+    <div class="progress-indicator mb-2">
+      Ejercicio <span id="current-ex">1</span> de <span id="total-ex">?</span>
+    </div>
+    <div class="navigation-buttons">
+      <button id="prevBtn" class="btn btn-secondary" disabled>Anterior</button>
+      <button id="nextBtn" class="btn btn-primary">Siguiente</button>
+    </div>
+  </div>
+
+  <!-- Ejercicio 1 - Visible inicialmente -->
+  <div class="ejercicio" data-ejercicio="1" style="display: block;">
+    <h3 class="mt-3">Ejercicio 1: FTP vs TFTP</h3>
+    <p>Drag and drop the descriptions of file-transfer protocols from the left onto the
+    correct protocols on the right. Select and Place:</p>
+
+    <div class="row drag-container">
+      <div class="col-12 col-sm-6 col-md-4">
+        <div class="drag-source" draggable="true" id="drag1">provides reliability when loading an IOS image upon boot up</div>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4">
+        <div class="drag-source" draggable="true" id="drag2">does not require user authentication</div>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4">
+        <div class="drag-source" draggable="true" id="drag3">uses port 69</div>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4">
+        <div class="drag-source" draggable="true" id="drag4">uses ports 20 and 21</div>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4">
+        <div class="drag-source" draggable="true" id="drag5">uses TCP</div>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4">
+        <div class="drag-source" draggable="true" id="drag6">uses UDP</div>
+      </div>
+    </div>
+
+    <div class="row drag-container mt-4">
+      <div class="col-12 col-sm-6 col-md-4">
+        <div class="drag-target" data-tipo="FTP">FTP</div>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4">
+        <div class="drag-target" data-tipo="FTP">FTP</div>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4">
+        <div class="drag-target" data-tipo="FTP">FTP</div>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4">
+        <div class="drag-target" data-tipo="TFTP">TFTP</div>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4">
+        <div class="drag-target" data-tipo="TFTP">TFTP</div>
+      </div>
+      <div class="col-12 col-sm-6 col-md-4">
+        <div class="drag-target" data-tipo="TFTP">TFTP</div>
+      </div>
+    </div>
+
+    <div class="text-center my-4">
+      <button class="btn btn-primary" onclick="verificarTodo(1)">Verificar</button>
+      <button class="btn btn-secondary" onclick="reiniciarTodo(1)">Reiniciar</button>
+    </div>
+  </div>
+
+  <!-- Ejercicio 2 - Oculto inicialmente -->
+  <div class="ejercicio" data-ejercicio="2" style="display: none;">
+    <h3 class="mt-3">Ejercicio 2: IPv4 Subnetting</h3>
+    <p>Drag and drop the IPv4 network subnets from the left onto the correct usable
+    host ranges on the right. Select and Place:</p>
+
+    <div class="row drag-container">
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="subnet1">172.28.228.144/18</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="subnet2">172.28.228.144/21</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="subnet3">172.28.228.144/23</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="subnet4">172.28.228.144/25</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="subnet5">172.28.228.144/29</div>
+      </div>
+            <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="#"></div>
+      </div>
+    </div>
+
+    <div class="row drag-container mt-4">
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="M23" data-original="172.28.228.1 - 172.28.229.254">172.28.228.1 - 172.28.229.254</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="M21" data-original="172.28.224.1 - 172.28.231.254">172.28.224.1 - 172.28.231.254</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="M25" data-original="172.28.228.129 - 172.28.228.254">172.28.228.129 - 172.28.228.254</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="M29" data-original="172.28.228.145 - 172.28.228.150">172.28.228.145 - 172.28.228.150</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="M18" data-original="172.28.192.1 - 172.28.255.254">172.28.192.1 - 172.28.255.254</div>
+      </div>
+    </div>
+
+    <div class="text-center my-4">
+      <button class="btn btn-primary" onclick="verificarTodo(2)">Verificar</button>
+      <button class="btn btn-secondary" onclick="reiniciarTodo(2)">Reiniciar</button>
+    </div>
+  </div>
+
+  <!-- Ejercicio 3 - Oculto inicialmente -->
+  <div class="ejercicio" data-ejercicio="3" style="display: none;">
+    <h3 class="mt-3">Ejercicio 3: Configuración de Red</h3>
+    <p>Refer to the exhibit. Drag and drop the networking parameters from the left
+    onto the correct values on the right. Select and Place</p>
+<img src="IMG/DRAG1.png" class="img-fluid mb-3" style="border-radius: 5px;" />
+    
+    <div class="row drag-container">
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="default_gateway">default gateway</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="host_address">host IP address</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="NIC_MACaddress">NIC MAC address</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="NIC_vendor_OUI">NIC vendor OUI</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="subnet_mask">subnet mask</div>
+      </div>
+      
+    </div>
+
+    <div class="row drag-container mt-4">
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="NO" data-original="00:0C:22">00:0C:22</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="NM" data-original="00:0C:22:83:79:A3">00:0C:22:83:79:A3</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="DG" data-original="192.168.1.193">192.168.1.193</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="HA" data-original="192.168.1.200">192.168.1.200</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="SM" data-original="255.255.255.192">255.255.255.192</div>
+      </div>
+    </div>
+
+    <div class="text-center my-4">
+      <button class="btn btn-primary" onclick="verificarTodo(3)">Verificar</button>
+      <button class="btn btn-secondary" onclick="reiniciarTodo(3)">Reiniciar</button>
+    </div>
+  </div>
+  <!--ejercicio 4-->
+  <div class="ejercicio" data-ejercicio="4" style="display: none;">
+    <h3 class="mt-3">Ejercicio 4: escriptions of IP protoco</h3>
+    <p>Drag and drop the descriptions of IP protocol transmissions from the left onto
+      the IP traffic types on the right</p>
+    
+    <div class="row drag-container">
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag6">sends transmissions in sequence</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag7">transmissions include an 8-byte header</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag8">transmits packets as a stream</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag9">transmits packets individually</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag10">uses a higher transmission rate to support latency-sensitive applications</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag11">uses a lower transmission rate to ensure reliability</div>
+      </div>
+    </div>
+
+    <div class="row drag-container mt-4">
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="TCP" ">TCP</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="TCP" >TCP</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="TCP" >TCP</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="UDP" >UDP</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="UDP" >UDP</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="UDP" >UDP</div>
+      </div>
+    </div>
+
+    <div class="text-center my-4">
+      <button class="btn btn-primary" onclick="verificarTodo(4)">Verificar</button>
+      <button class="btn btn-secondary" onclick="reiniciarTodo(4)">Reiniciar</button>
+    </div>
+  </div>
+
+  <div class="ejercicio" data-ejercicio="5" style="display: none;">
+    <h3 class="mt-3">Ejercicio 5: application protocols</h3>
+    <p>Drag and drop the application protocols from the left onto the transport
+      protocols that it uses on the right</p>
+    
+    <div class="row drag-container">
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag12">DHCP</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag13">FTP</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag14">SMTP</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag15">SSH</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag16">SNMP</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag17">TFTP</div>
+      </div>
+    </div>
+
+    <div class="row drag-container mt-4">
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="TCP" ">TCP</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="TCP" >TCP</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="TCP" >TCP</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="UDP" >UDP</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="UDP" >UDP</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="UDP" >UDP</div>
+      </div>
+    </div>
+
+    <div class="text-center my-4">
+      <button class="btn btn-primary" onclick="verificarTodo(5)">Verificar</button>
+      <button class="btn btn-secondary" onclick="reiniciarTodo(5)">Reiniciar</button>
+    </div>
+  </div>
+<!--6-->
+<div class="ejercicio" data-ejercicio="6" style="display: none;">
+    <h3 class="mt-3">Ejercicio 6: networking parameter</h3>
+    <p>Drag and drop the networking parameters from the left on to the correct values
+      on the right.</p>
+    
+    <div class="row drag-container">
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag18">SMTP</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag19">SNMP</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag20">TFTP</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag21">VolP</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag22">SSH</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag23">FTP</div>
+      </div>
+    </div>
+
+    <div class="row drag-container mt-4">
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="Connection_Oriented" data-original="Connection Oriented">Connection Oriented</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="Connection_Oriented" data-original="Connection Oriented">Connection Oriented</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="Connection_Oriented" data-original="Connection Oriented" >Connection Oriented</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="Connectionless" >Connectionless</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="Connectionless" >Connectionless</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="Connectionless" >Connectionless</div>
+      </div>
+    </div>
+
+    <div class="text-center my-4">
+      <button class="btn btn-primary" onclick="verificarTodo(6)">Verificar</button>
+      <button class="btn btn-secondary" onclick="reiniciarTodo(6)">Reiniciar</button>
+    </div>
+  </div>
+<!--7-->
+<div class="ejercicio" data-ejercicio="7" style="display: none;">
+    <h3 class="mt-3">Ejercicio 7: CP/IP protocols</h3>
+    <p>Drag and drop the TCP/IP protocols from the left onto their primary
+      transmission protocols on the right.</p>
+    
+    <div class="row drag-container">
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag24">DNS</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag25">HTTP</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag26">RTP</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag27">SMTP</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag28">SNMP</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag29">Telnet</div>
+      </div>
+    </div>
+
+    <div class="row drag-container mt-4">
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="TCP" ">TCP</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="TCP" >TCP</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="TCP" >TCP</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="UDP" >UDP</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="UDP" >UDP</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="UDP" >UDP</div>
+      </div>
+    </div>
+
+    <div class="text-center my-4">
+      <button class="btn btn-primary" onclick="verificarTodo(7)">Verificar</button>
+      <button class="btn btn-secondary" onclick="reiniciarTodo(7)">Reiniciar</button>
+    </div>
+  </div>
+
+ <!--8-->
+<div class="ejercicio" data-ejercicio="8" style="display: none;">
+    <h3 class="mt-3">Ejercicio 8:characteristics of network</h3>
+    <p>Drag and drop the characteristics of network architectures from the left onto
+       the type of architecture on the right.
+        Select and Place:.</p>
+    
+    <div class="row drag-container">
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag30">single device handles the core and the distribution layer</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag31">enhances network availability</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag32">more cost-effective than other options</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag33">most appropriate for small network designs</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag34">separate devices handle the core and the distribution layer</div>
+      </div>
+    </div>
+
+    <div class="row drag-container mt-4">
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="Collapsed_Core"  data-original="Collapsed Core">Collapsed Core</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="Collapsed_Core" data-original="Collapsed Core" >Collapsed Core</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="Collapsed_Core" data-original="Collapsed Core" >Collapsed Core</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="Three_Tier" data-original="Three-Tier" >Three-Tier</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="Three_Tier" data-original="Three-Tier" >Three-Tier</div>
+      </div>
+
+    </div>
+
+    <div class="text-center my-4">
+      <button class="btn btn-primary" onclick="verificarTodo(8)">Verificar</button>
+      <button class="btn btn-secondary" onclick="reiniciarTodo(8)">Reiniciar</button>
+    </div>
+  </div>
+<!--8-->
+  <div class="ejercicio" data-ejercicio="9" style="display: none;">
+    <h3 class="mt-3">Ejercicio 9:TCP or UDP details</h3>
+    <p>Drag and drop the TCP or UDP details from the left onto their corresponding
+        protocols on the right.
+        Select and Place:.</p>
+    
+    <div class="row drag-container">
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag35">transmitted based on data contained in the packet without the need for a data channel</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag36">requires the client and the server to establish a connection before sending the packet</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag37">provides best-effort service</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag38">supports reliable data transmission</div>
+      </div>
+    </div>
+
+    <div class="row drag-container mt-4">
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="TCP" data-tipo="TCP">TCP</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="TCP" data-tipo="TCP">TCP</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="UDP" data-tipo="UDP" >UDP</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="UDP" data-tipo="UDP" >UDP</div>
+      </div>
+    </div>
+
+    <div class="text-center my-4">
+      <button class="btn btn-primary" onclick="verificarTodo(9)">Verificar</button>
+      <button class="btn btn-secondary" onclick="reiniciarTodo(9)">Reiniciar</button>
+    </div>
+  </div>
+  <div class="ejercicio" data-ejercicio="10" style="display: none;">
+    <h3 class="mt-3">Ejercicio 10:IPv6 addresses</h3>
+    <p>Drag and drop the IPv6 addresses from the left onto the corresponding address
+        types on the right.
+        Select and Place:</p>
+    
+    <div class="row drag-container">
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag39">2001:db8:600d:cafe::123</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag340">fcba:926a:e8e:7a25:b1:c6d2:1a76:8fdc</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag41">fd6d:c83b:5cef:b6b2::1</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag42">3ffe:e54d:620:a87a::f00d</div>
+      </div>
+    </div>
+
+    <div class="row drag-container mt-4">
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="Global_Unicast" data-original="Global Unicast">Global Unicast</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="Global_Unicast" data-original="Global Unicast">Global Unicast</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="Unique_Local" data-original="Unique Local" >Unique Local</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="Unique_Local" data-original="Unique Local" >Unique Local</div>
+      </div>
+    </div>
+
+    <div class="text-center my-4">
+      <button class="btn btn-primary" onclick="verificarTodo(10)">Verificar</button>
+      <button class="btn btn-secondary" onclick="reiniciarTodo(10)">Reiniciar</button>
+    </div>
+  </div>
+  <div class="ejercicio" data-ejercicio="11" style="display: none;">
+    <h3 class="mt-3">Ejercicio 11:IPv6 addresses</h3>
+    <p>Drag and drop the IPv6 addresses from the left onto the corresponding address
+      types on the right.
+      Select and Place:</p>
+    
+    <div class="row drag-container">
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag43">fe80::a00:27ff:feeb:89aa</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag44">3ffe:e54d:620:a87a::f00d</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag45">ff05::1:3</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-source" draggable="true" id="Drag46">2001:db8:600d:cafe::123</div>
+      </div>
+    </div>
+
+    <div class="row drag-container mt-4">
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="Global_Unicast"  data-original="Global Unicast">Global Unicast</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="Global_Unicast" data-original="Global Unicast">Global Unicast</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="Link_Local_U" data-original="Link-Local Unicast">Link-Local Unicast</div>
+      </div>
+      <div class="col-md-4">
+        <div class="drag-target" data-tipo="Multicast" data-original="Multicast">Multicast</div>
+      </div>
+    </div>
+
+    <div class="text-center my-4">
+      <button class="btn btn-primary" onclick="verificarTodo(11)">Verificar</button>
+      <button class="btn btn-secondary" onclick="reiniciarTodo(11)">Reiniciar</button>
+    </div>
+  </div>
+<footer class="footer mt-auto py-3 bg-dark text-light">
+  <div class="container text-center">
+    <span class="footer-text">&copy; Simulador CCNA 2025. Christian Domingo Flores. Todos los derechos reservados.</span>
+  </div>
+</footer>
+
+</div>
+<!--Solo es para hacer pruebas de produccion-->
+<script src="servlet.js"></script>
+
+<script src="DRAG_DROP.js"></script>
+
+  <!--Code corriendo localemente y nuevas funciones en proceso-->
+<!--<script src="COPIACCNA.JS"></script>-->
+<script>
+
+
+Swal.fire({
+  title: '<i class="fas fa-handshake fa-2x fa-fade" style=" color:#00fff0;"></i><br><span class="custom-title">Welcome to the Simulator!</span>',
+  html: `
+    <p class="custom-text">Are you ready to test your knowledge?</p>
+
+ 
+  `,
+  background: 'rgba(30, 30, 30, 0.85)',
+  showClass: {
+    popup: 'animate__animated animate__fadeInDown'
+  },
+  hideClass: {
+    popup: 'animate__animated animate__fadeOutUp'
+  },
+  customClass: {
+    popup: 'custom-popup',
+    confirmButton: 'custom-btn',
+    title: 'custom-title',
+    htmlContainer: 'custom-html'
+  },
+  confirmButtonText: '🚀 Let’s Go!',
+  allowOutsideClick: false,
+  allowEscapeKey: false
+});
+
+</script>
+</body>
+</html>
