@@ -1,6 +1,5 @@
 
   const preguntasBase = [
-
     {
       texto: " How do TCP and UDP differ in the way that they establish a connection between two endpoints?",
       opciones: ["TCP uses the three-way handshake, and UDP does not guarantee message delivery.",
