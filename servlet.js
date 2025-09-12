@@ -160,20 +160,192 @@
     correcta: [2]
   },
   {
-    "texto": "What is a difference between an IPv6 multicast address and an IPv6 anycast address?",
-    "opciones": [
+    text: "What is a difference between an IPv6 multicast address and an IPv6 anycast address?",
+    opciones: [
       "An IPv6 multicast address uses the prefix 2002::/15 and forwards to one destination, and an IPv6 anycast address uses the prefix ff00:/8 and forwards to any destination in a group.",
       "A packet sent to an IPv6 multicast address is delivered to one or more destinations at once, but a packet sent to an IPv6 anycast address is routed to the closest interface with that address.",
       "IPV6 multicast addresses are used to transition from IPv4 to IPv6, and IPv6 anycast addresses are used for address aggregation in an IPv6-only environment.",
       "An IPV6 multicast address is assigned to numerous interfaces within a subnet, but an IPv6 anycast address is used for a predefined group of nodes in an all-IPv6 routers group."
     ],
-    "correcta": [1]
+  correcta: [1]
   },
   {
-    "texto": "Which syslog message logging level displays interface line protocol up/down events?",
-    "opciones": ["informational", "alerts", "debugging", "notifications"],
-    "correcta": [3]
-  }
+    texto: "Which syslog message logging level displays interface line protocol up/down events?",
+    opciones: ["informational", "alerts", "debugging", "notifications"],
+    correcta: [3]
+  },
+       {                    
+      texto:  "What is a recommended approach to avoid co-channel congestion while installing access points that use the 2.4 GHz frequency?",
+      opciones: [" different nonoverlapping",
+                 " one overlapping channel", 
+                 " one nonoverlapping channel",
+                 " different overlapping channels"
+               ],
+      correcta: [0]
+    },  
+      {                    
+      texto:  " A manager asks a network engineer to advise which cloud service models are used so employees do not have to waste their time installing, managing, and updating software that is only used occasionally. Which cloud service model does the engineer recommend?",
+      opciones: ["infrastructure-as-a-service",
+                 "platform-as-a-service", 
+                 "business process as service to support different types of service",
+                 "software-as-a-service"
+               ],
+      correcta: [3]
+    }, 
+      {                    
+      texto:  "Which networking function occurs on the data plane?",
+      opciones: ["processing inbound SSH management traffic",
+                 "sending and receiving OSPF Hello packets", 
+                 "facilitates spanning-tree elections",
+                 "forwarding remote client/server traffic"
+               ],
+      correcta: [3]
+    },  
+       {                    
+      texto:  "Under which condition is TCP preferred over UDP?",
+      opciones: ["UDP is used when low latency is optimal, and TCP is used when latency is tolerable.",
+                 "TCP is used when dropped data is more acceptable, and UDP is used when data is accepted out-of-order", 
+                 "TCP is used when data reliability is critical, and UDP is used when missing packets are acceptable",
+                 "UDP is used when data is highly interactive, and TCP is used when data is time-sensitive."
+               ],
+      correcta: [2]
+    },  
+       {                    
+      texto:  "Refer to the exhibit. Shortly after SiteA was connected to SiteB over a new single-mode fiber path, users at SiteA report intermittent connectivity issues with applications hosted at SiteB. What is the cause of the intermittent connectivity issue?",
+      opciones: ["Interface errors are incrementing",
+                 " High usage is causing high latency.", 
+                 "An incorrect SFP media type was used at SiteA.",
+                 "The sites were connected with the wrong cable type"
+               ],
+        Image:"IMG/P8.png",
+      correcta: [0]
+    },{ 
+         texto:"An implementer is preparing hardware for virtualization to create virtual machines on a host. What is needed to provide communication between hardware and virtual machines?",
+      opciones: ["router",
+                 " hypervisor", 
+                 "switch",
+                 "straight cable"
+               ],
+      correcta: [1]
+    },  
+       {                    
+      texto:" How does a Cisco Unified Wireless Network respond to Wi-Fi channel overlap?",
+      opciones: ["It allows the administrator to assign the channels on a per-device or per-interface basis.",
+                 " It segregates devices from different manufactures onto different channels.", 
+                 "It analyzes client load and background noise and dynamically assigns a channel. ",
+                 "It alternates automatically between 2.4 GHz and 5 GHz on adjacent access points."
+               ],
+      correcta: [2]
+    },  
+       {                    
+      texto:" In which situation is private IPv4 addressing appropriate for a new subnet on the network of an organization?",
+      opciones: ["The network has multiple endpoint listeners, and it is desired to limit the number of broadcasts",
+                 " The ISP requires the new subnet to be advertised to the Internet for web services.", 
+                 " There is limited unique address space, and traffic on the new subnet will stay local within the organization.",
+                 "Traffic on the subnet must traverse a site-to-site VPN to an outside organization"
+               ],
+      correcta: [2]
+    },  
+       {                    
+      texto:" Which 802.11 frame type is indicated by a probe response after a client sends a probe request?",
+      opciones: ["data",
+                 "management", 
+                 "control",
+                 "action"
+               ],
+      correcta: [1]
+    },  
+       {                    
+      texto:" What is the difference in data transmission delivery and reliability between TCP and UDP?",
+      opciones: [" TCP transmits data at a higher rate and ensures packet delivery. UDP retransmits lost data to ensure applications receive the data on the remote end.",
+                 " TCP requires the connection to be established before transmitting data. UDP transmits data at a higher rate without ensuring packet delivery.", 
+                 " UDP sets up a connection between both devices before transmitting data. TCP uses the three-way handshake to transmit data with a reliable connection.",
+                 " UDP is used for multicast and broadcast communication. TCP is used for unicast communication and transmits data at a higher rate with error checking."
+               ],
+      correcta: [1]
+    },  
+       {                    
+      texto:" Refer to the exhibit. When PC-A sends traffic to PC-B, which network component is in charge of receiving the packet from PC-A, verifying the IP addresses, and forwarding the packet to PC-B?",
+      opciones: ["router",
+                 "Layer 2 switch", 
+                 " load balancer",
+                 "firewall"
+               ],
+      Image:"/IMG/P9.png",
+      correcta: [0]
+    }, {
+        texto:"Which type of IPv6 address is similar to a unicast address but is assigned to multiple devices on the same network at the same time? ",
+      opciones: [" global unicast address",
+                 " link-local address", 
+                 " anycast address",
+                 "multicast address"
+               ],
+      correcta: [2]
+    },     
+        {                    
+      texto:"What is a characteristic of private IPv4 addressing? ",
+      opciones: [" composed of up to 65,536 available addresses",
+                 " issued by IANA in conjunction with an autonomous system number", 
+                 " used without tracking or registration",
+                 " traverse the Internet when an outbound ACL is applied"
+               ], 
+      correcta: [2]
+    },     
+        {                    
+      texto:"What is a function of an endpoint on a network? ",
+      opciones: [" provides wireless services to users in a building ",
+                 "connects server and client device to a network", 
+                 " allows users to record data and transmit to a file server",
+                 "  forwards traffic between VLANs on a network"
+               ], 
+      correcta: [2]
+    },     
+        {                    
+      texto:"What is the function of a controller in controller-based networking? ",
+      opciones: [" It serves as the centralized management point of an SDN architecture",
+                 " It is a pair of core routers that maintain all routing decisions for a campus", 
+                 " It centralizes the data plane for the network ",
+                 " It is the card on a core router that maintains all routing decisions for a campus."
+               ], 
+      correcta: [0]
+    },     
+        {                    
+      texto:"Refer to the exhibit. Each router must be configured with the last usable IP address in the subnet.  Which configuration fulfills this requirement?",
+      opciones: ["R7# interface FastEthernet1/0 ip address 10.88.31.127 255.255.255.192 R8# interface FastEthernet0/0 ip address 10.19.63.95 255.255.255.240 R9# interface FastEthernet1/1 ip address 10.23.98.159 255.255.255.224",
+                 " R7# interface FastEthernet1/0 ip address 10.88.31.126 255.255.255.240 R8# interface FastEthernet0/0 ip address 10.19.63.94 255.255.255.192 R9# interface FastEthernet1/1 ip address 10.23.98.158 255.255.255.248", 
+                 " R7# interface FastEthernet1/0 ip address 10.88.31.127 255.255.255.240 R8# interface FastEthernet0/0 ip address 10.19.63.95 255.255.255.192 R9# interface FastEthernet1/1 ip address 10.23.98.159 255.255.255.248",
+                 " R7# interface FastEthernet1/0 ip address 10.88.31.126 255.255.255.192 R8# interface FastEthernet0/0 ip address 10.19.63.94 255.255.255.240 R9# interface FastEthernet1/1 ip address 10.23.98.158 255.255.255.224"
+               ], 
+        Image:"IMG/109.png",
+      correcta: [3]
+    },     
+        {                    
+      texto:"How do TCP and UDP fit into a query-responsible model? ",
+      opciones: [" TCP avoids using sequencing and UDP avoids using acknowledgments ",
+                 "  TCP establishes a connection prior to sending data, and UDP sends immediately", 
+                 "TCP encourages out-of-order packet delivery, and UDP prevents re-ordering",
+                 " TCP uses error detection for packets, and UDP uses error recovery"
+               ], 
+      correcta: [1]
+    },       
+        {                    
+      texto:"What is the collapsed layer in collapsed core architectures?",
+      opciones: [" Core and distribution",
+                 "access and WAN ", 
+                 "distribution and access ",
+                 "core and WAN"
+               ], 
+      correcta: [0]
+    },
+        {                    
+      texto:"What is the role of disaggregation in controller-based networking?",
+      opciones: [" It divides the control-plane and data-plane functions ",
+                 "  It streamlines traffic handling by assigning individual devices to perform either Layer 2 or Layer 3 function ", 
+                 "It summarizes the routes between the core and distribution layers of the network topology",
+                 " It enables a network topology to quickly adjust from a ring network to a star network"
+               ], 
+      correcta: [0]
+    },      
   ];
 
 
